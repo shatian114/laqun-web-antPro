@@ -5,13 +5,13 @@ import { connect } from 'dva';
 const { Option } = Select;
 const FormItem = Form.Item;
 
-@connect(({ customer, addWx, loading }) => ({
+@connect(({ customer, addLaQun, loading }) => ({
   customer,
-  addWx,
+  addLaQun,
   customerSearching: loading.effects['customer/search'],
-  searching: loading.effects['addWx/search'],
-  deleteing: loading.effects['imgResources/delete'],
-  adding: loading.effects['imgResources/add'],
+  searching: loading.effects['addLaQun/search'],
+  deleteing: loading.effects['addLaQun/delete'],
+  adding: loading.effects['addLaQun/add'],
 }))
 @Form.create()
 class AddWxMgr extends PureComponent {
@@ -32,7 +32,7 @@ class AddWxMgr extends PureComponent {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch({
-          type: 'addWx/search',
+          type: 'addLaQun/search',
           payload: {
             ...values,
             page: page,
@@ -44,41 +44,37 @@ class AddWxMgr extends PureComponent {
   };
 
   delete = record => {
-    const { form, dispatch } = this.props;
-    form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        dispatch({
-          type: 'imgResources/delete',
-          payload: {
-            fileName: record.val,
-            resourcesType: values.resourcesType,
-            callback: this.search,
-          },
-        });
-      }
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'addLaQun/delete',
+      payload: {
+        customer: record.customer,
+        qunQr: record.qunQr,
+        callback: this.search,
+      },
     });
   };
 
   selectFile = file => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'addWx/save',
+      type: 'addLaQun/save',
       payload: {
-        addWxFile: file.fileList[0].originFileObj,
+        addLaQunFile: file.fileList[0].originFileObj,
       },
     });
   };
 
   add = () => {
-    const { dispatch, addWx, form } = this.props;
+    const { dispatch, addLaQun, form } = this.props;
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch({
-          type: 'addWx/add',
+          type: 'addLaQun/add',
           payload: {
             customer: values.customer,
             priority: values.selectPriority,
-            file: addWx.addWxFile,
+            file: addLaQun.addLaQunFile,
             callback: this.search,
           },
         });
@@ -102,8 +98,9 @@ class AddWxMgr extends PureComponent {
       customerSearching,
       searching,
       adding,
+      deleteing,
       customer,
-      addWx,
+      addLaQun,
     } = this.props;
     const columns = [
       {
@@ -112,19 +109,14 @@ class AddWxMgr extends PureComponent {
         render: (text, record, index) => <span>{index + 1}</span>,
       },
       {
-        title: '手机号',
-        dataIndex: 'phone',
+        title: '群二维码',
+        dataIndex: 'qunQr',
         key: 1,
       },
       {
-        title: '正在使用',
-        dataIndex: 'isUse',
+        title: '群ID',
+        dataIndex: 'qunid',
         key: 2,
-      },
-      {
-        title: 'wxid',
-        dataIndex: 'wxid',
-        key: 3,
       },
       {
         title: '昵称',
@@ -132,49 +124,39 @@ class AddWxMgr extends PureComponent {
         key: 4,
       },
       {
-        title: '性别',
-        dataIndex: 'sex',
+        title: '已经拉的数量',
+        dataIndex: 'laedNum',
         key: 5,
       },
       {
-        title: '省',
-        dataIndex: 'province',
+        title: '剩余拉的数量',
+        dataIndex: 'canLaNum',
         key: 6,
       },
       {
-        title: '市',
-        dataIndex: 'city',
+        title: '群成员数量',
+        dataIndex: 'friendNum',
         key: 7,
       },
       {
-        title: '是否被拉',
-        dataIndex: 'isLa',
+        title: '群是否异常',
+        dataIndex: 'isBad',
         key: 8,
       },
       {
-        title: '被拉的群',
-        dataIndex: 'laQunId',
+        title: '最后获取时间',
+        dataIndex: 'lastGetTimeStr',
         key: 9,
-      },
-      {
-        title: '被拉时间',
-        dataIndex: 'laTime',
-        key: 10,
-      },
-      {
-        title: '添加时间',
-        dataIndex: 'addTime',
-        key: 11,
       },
       {
         title: '优先级',
         dataIndex: 'priority',
-        key: 12,
+        key: 10,
       },
       {
         title: '客户',
         dataIndex: 'customer',
-        key: 13,
+        key: 11,
       },
       {
         title: '操作',
@@ -187,7 +169,7 @@ class AddWxMgr extends PureComponent {
                 this.delete(record);
               }}
             >
-              {/* <Button icon='delete' loading={deleteing}>删除</Button> */}
+              <Button icon='delete' loading={deleteing}>删除</Button>
             </Popconfirm>
           </Button.Group>
         ),
@@ -251,14 +233,14 @@ class AddWxMgr extends PureComponent {
         </Form>
 
         <Table
-          dataSource={addWx.addWxList}
+          dataSource={addLaQun.addLaQunList}
           loading={searching}
           columns={columns}
           pagination={{
             onChange: (page, pageSize) => {
               this.search(this, page, pageSize);
             },
-            total: addWx.total,
+            total: addLaQun.total,
           }}
         />
       </Card>

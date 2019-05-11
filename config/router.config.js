@@ -110,6 +110,11 @@ export default [
         component: './wxQunWeb/AddLaQunMgr',
       },
       {
+        path: '/wxQunWeb/JobMgr',
+        name: '任务管理',
+        component: './wxQunWeb/JobMgr',
+      },
+      {
         component: '404',
       },
     ],

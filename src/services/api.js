@@ -1,4 +1,4 @@
-import { requestPost, requestForm } from '@/utils/request';
+import { requestPost, requestForm} from '@/utils/request';
 
 export async function login(data) {
   return requestPost('/login', data);
@@ -153,13 +153,13 @@ export async function delAddWx(data) {
 }
 
 export async function addAddLaQun(data) {
-  return requestForm('/addAddLaQun', data);
+  return requestForm('/addLaQun', data);
 }
 
 export async function getAddLaQun(data) {
-  return requestPost('/getAddLaQun', data);
+  return requestPost('/getLaQun', data);
 }
 
 export async function delAddLaQun(data) {
-  return requestPost('/delAddLaQun', data);
+  return requestPost('/delLaQun', data);
 }
