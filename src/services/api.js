@@ -163,3 +163,11 @@ export async function getAddLaQun(data) {
 export async function delAddLaQun(data) {
   return requestPost('/delLaQun', data);
 }
+
+export async function releaseJob(data) {
+  return requestPost('/releaseJob', data);
+}
+
+export async function generalExcel(data) {
+  return requestPost('/generalExcel', data);
+}

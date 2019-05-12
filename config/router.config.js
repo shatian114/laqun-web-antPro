@@ -115,6 +115,11 @@ export default [
         component: './wxQunWeb/JobMgr',
       },
       {
+        path: '/wxQunWeb/GetExcel',
+        name: '获取报表',
+        component: './wxQunWeb/GetExcel',
+      },
+      {
         component: '404',
       },
     ],
