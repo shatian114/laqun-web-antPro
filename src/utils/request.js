@@ -17,6 +17,14 @@ const myAxios = axios.create({
   },
 });
 
+const testAxios = axios.create({
+  baseURL: '/wxQunWeb_war/api/phoneServer',
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+});
+
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -101,6 +109,20 @@ export function requestForm(url, formdata) {
         resolve(response);
       })
       .catch(err => {
+        reject(err);
+      });
+  });
+}
+
+export function requestPostTest(url, params) {
+  return new Promise((resolve, reject) => {
+    testAxios
+      .post(url, stringify(params))
+      .then(response => {
+        resolve(response);
+      })
+      .catch(err => {
+        console.log(err);
         reject(err);
       });
   });

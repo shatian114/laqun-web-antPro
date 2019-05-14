@@ -21,8 +21,8 @@ class TextResourcesMgr extends PureComponent {
           type: 'textResources/search',
           payload: {
             resourcesType: values.resourcesType,
-            page: page,
-            pageSize: pageSize,
+            'page': page,
+            'pageSize': pageSize,
           },
         });
       }
@@ -162,6 +162,10 @@ class TextResourcesMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: textResources.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
       </Card>

@@ -22,8 +22,8 @@ class SnMgr extends PureComponent {
           type: 'sn/searchSn',
           payload: {
             ...values,
-            page: page,
-            pageSize: pageSize,
+            'page': page,
+            'pageSize': pageSize,
           },
         });
       }
@@ -160,6 +160,12 @@ class SnMgr extends PureComponent {
         title: '最后通信时间',
         dataIndex: 'lastHttpTime',
         key: 9,
+        render: (text, record) => {
+          const color = record.lastHttpTime.length === 19 && Date.parse(record.lastHttpTime)+(10*60*1000) < Date.parse(new Date()) ? 'red' : '';
+          return (
+            <span style={{'color': color}}>{text}</span>
+          )
+        }
       },
       {
         title: '手机APP版本',
@@ -234,6 +240,10 @@ class SnMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: sn.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
 

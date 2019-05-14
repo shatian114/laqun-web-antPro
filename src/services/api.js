@@ -1,4 +1,4 @@
-import { requestPost, requestForm} from '@/utils/request';
+import { requestPost, requestForm, requestPostTest} from '@/utils/request';
 
 export async function login(data) {
   return requestPost('/login', data);
@@ -129,7 +129,7 @@ export async function clearImg(data) {
 }
 
 export async function addImgResources(data) {
-  return requestForm('/addImgResources', data);
+  return requestPost('/addImgResources', data);
 }
 
 export async function getImgList(data) {
@@ -170,4 +170,12 @@ export async function releaseJob(data) {
 
 export async function generalExcel(data) {
   return requestPost('/generalExcel', data);
+}
+
+export async function getCosSigner(data) {
+  return requestPost('/getImgAuth', data);
+}
+
+export async function test(data) {
+  return requestPostTest('/getResource', data);
 }

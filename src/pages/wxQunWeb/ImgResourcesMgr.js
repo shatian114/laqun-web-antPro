@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Form, Card, Button, Table, Popconfirm, Upload, Select } from 'antd';
 import { connect } from 'dva';
+import { uploadImg } from '@/utils/uploadImg';
+import { webConfig } from '@/utils/Constant';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -45,7 +47,7 @@ class ImgResourcesMgr extends PureComponent {
     });
   };
 
-  selectFile = file => {
+  selectFile = (file) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'imgResources/save',
@@ -81,6 +83,18 @@ class ImgResourcesMgr extends PureComponent {
     });
   };
 
+  test = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'imgResources/test',
+      payload: {
+        sn: '29',
+        resourcesType: 'avatar',
+        resourcesNum: 2,
+      },
+    });
+  }
+
   render() {
     const {
       form: { getFieldDecorator },
@@ -101,9 +115,10 @@ class ImgResourcesMgr extends PureComponent {
         key: 1,
         render: text => (
           <img
-            src={`/wxQunWeb_war/files/${imgResources.resourceType}/${text}.jpg`}
+            src={`http://${imgResources.resourceType.toLowerCase()}${webConfig.tpUriPre}${text}?${Date.parse(new Date())}`}
             width={80}
             height={80}
+            alt='无法加载'
           />
         ),
       },
@@ -152,7 +167,7 @@ class ImgResourcesMgr extends PureComponent {
           </FormItem>
           <FormItem style={{ marginLeft: '200px' }} label="添加图片资源">
             <Upload
-              multiple={true}
+              multiple
               beforeUpload={() => {
                 return false;
               }}
@@ -162,8 +177,13 @@ class ImgResourcesMgr extends PureComponent {
             </Upload>
           </FormItem>
           <FormItem>
-            <Button icon="file-add" type="primary" onClick={this.add} loading={adding}>
+            <Button icon="file-add" type="primary" onClick={this.add} loading="adding">
               添加
+            </Button>
+          </FormItem>
+          <FormItem>
+            <Button icon="file-add" type="primary" onClick={this.test}>
+              测试获取图片
             </Button>
           </FormItem>
         </Form>
@@ -177,6 +197,10 @@ class ImgResourcesMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: imgResources.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
       </Card>

@@ -39,8 +39,8 @@ class SnGroupMgr extends PureComponent {
           type: 'snGroup/search',
           payload: {
             groupName: values.searchGroupName,
-            page: page,
-            pageSize: pageSize,
+            'page': page,
+            'pageSize': pageSize,
           },
         });
       }
@@ -52,7 +52,7 @@ class SnGroupMgr extends PureComponent {
     dispatch({
       type: 'snGroup/save',
       payload: {
-        operateType: operateType,
+        'operateType': operateType,
         visibleOperate: true,
         groupName: operateType === 'change' ? record.groupName : '',
         groupMember: operateType === 'change' ? record.groupMember.split(',') : [],
@@ -202,6 +202,10 @@ class SnGroupMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: snGroup.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
 

@@ -22,21 +22,8 @@ export default [
     path: '/',
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
+    
     routes: [
-      {
-        path: '/test',
-        name: '测试页面',
-        routes: [
-          {
-            path: '/test/t1',
-            name: '第一测试',
-            component: './test/t1',
-          },
-        ],
-      },
-    ],
-    routes: [
-      // dashboard
       { path: '/', redirect: '/wxQunWeb/snMgr' },
       {
         path: '/wxQunWeb/SnMgr',
@@ -53,11 +40,11 @@ export default [
         name: '全局配置',
         component: './wxQunWeb/GlobalConfMgr',
       },
-      {
-        path: '/wxQunWeb/PhoneAppMgr',
-        name: '手机APP管理',
-        component: './wxQunWeb/PhoneAppMgr',
-      },
+      // {
+      //   path: '/wxQunWeb/PhoneAppMgr',
+      //   name: '手机APP管理',
+      //   component: './wxQunWeb/PhoneAppMgr',
+      // },
       {
         path: '/wxQunWeb/CustomerMgr',
         name: '客户管理',

@@ -88,6 +88,8 @@ export default {
       },
     },
   },
+  base: '/dist/',
+  publicPath: '/dist/',
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
@@ -116,7 +118,7 @@ export default {
     },
   },
   manifest: {
-    basePath: '/',
+    basePath: '/dist',
   },
 
   chainWebpack: webpackPlugin,

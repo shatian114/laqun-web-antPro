@@ -145,6 +145,10 @@ class CustomerMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: customer.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
       </Card>

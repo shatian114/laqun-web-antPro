@@ -20,8 +20,8 @@ class NewsMgr extends PureComponent {
           type: 'news/search',
           payload: {
             newsName: values.searchNewsName,
-            page: page,
-            pageSize: pageSize,
+            'page': page,
+            'pageSize': pageSize,
           },
         });
       }
@@ -148,6 +148,10 @@ class NewsMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: news.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
       </Card>

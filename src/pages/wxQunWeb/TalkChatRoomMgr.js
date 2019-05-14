@@ -20,8 +20,8 @@ class TalkChatRoomMgr extends PureComponent {
           type: 'talkChatRoom/search',
           payload: {
             qunQr: values.searchQunQr,
-            page: page,
-            pageSize: pageSize,
+            'page': page,
+            'pageSize': pageSize,
           },
         });
       }
@@ -158,6 +158,10 @@ class TalkChatRoomMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: talkChatRoom.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
       </Card>

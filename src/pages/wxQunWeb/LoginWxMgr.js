@@ -115,7 +115,7 @@ class LoginWxMgr extends PureComponent {
         key: 4,
       },
       {
-        title: '允许加好友数量',
+        title: '获取添加微信资源数量',
         dataIndex: 'addNum',
         key: 5,
       },
@@ -227,6 +227,10 @@ class LoginWxMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: loginWx.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
       </Card>

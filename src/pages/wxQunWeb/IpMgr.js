@@ -109,6 +109,10 @@ class IpMgr extends PureComponent {
               this.search(this, page, pageSize);
             },
             total: ip.total,
+            showSizeChanger: true,
+            onShowSizeChange: (page, pageSize) => {
+              this.search(this, page, pageSize);
+            },
           }}
         />
       </Card>
