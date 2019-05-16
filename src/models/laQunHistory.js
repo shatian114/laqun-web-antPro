@@ -1,22 +1,19 @@
-import { searchSn, setRemark, deleteSn, addSn, stopJob } from '@/services/api';
+import { getLaQunHistory } from '@/services/api';
 import { message } from 'antd';
 
 export default {
-  namespace: 'sn',
+  namespace: 'laQunHistory',
 
   state: {
-    snList: [],
-    editRecord: {},
-    visibleEditRemark: false,
-    snFile: null,
+    infoList: [],
     total: 0,
     page: 1,
     pageSize: 10,
   },
 
   effects: {
-    *searchSn({ payload }, { call, put }) {
-      const response = yield call(searchSn, payload);
+    *search({ payload }, { call, put }) {
+      const response = yield call(getLaQunHistory, payload);
 
       yield put({
         type: 'save',
@@ -134,6 +131,14 @@ export default {
       return {
         ...state,
         ...payload,
+      };
+    },
+    clear() {
+      return {
+        infoList: [],
+        total: 0,
+        page: 1,
+        pageSize: 10,
       };
     },
   },

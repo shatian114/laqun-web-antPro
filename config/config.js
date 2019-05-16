@@ -91,6 +91,7 @@ export default {
   base: '/dist/',
   publicPath: '/dist/',
   ignoreMomentLocale: true,
+  history: 'hash',
   lessLoaderOptions: {
     javascriptEnabled: true,
   },

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, Card, Button, Select, Modal, Checkbox, Row, Col } from 'antd';
+import { Form, Card, Button, Select, Modal, Checkbox, Row, Col, Divider } from 'antd';
 import { connect } from 'dva';
 import AddFriend from '@/components/Job/AddFriend';
 import LoginWx from '@/components/Job/LoginWx';
@@ -63,6 +63,7 @@ class JobMgr extends PureComponent {
     const { form, dispatch } = this.props;
     form.validateFieldsAndScroll((err, values) => {
       if(!err) {
+        console.log('start release job', values);
         dispatch({
           type: 'job/release',
           payload: {
@@ -154,21 +155,14 @@ class JobMgr extends PureComponent {
                 </Select>
               )}
             </FormItem>
-            <br />
+            <Divider />
             <Checkbox onChange={this.allSelect}>全选/取消全选</Checkbox>
+            <Divider />
             <FormItem>
               {getFieldDecorator('selectSnArr', {
                 initialValue: this.state.selectSnArr,
               })(
-                <Checkbox.Group onChange={this.changeSelectSnGroup}>
-                  <Row>
-                    {sn.snList.map(v => (
-                      <Col key={v.sn} span={4}>
-                        <Checkbox value={v.sn}>{v.sn}</Checkbox>
-                      </Col>
-                    ))}
-                  </Row>
-                </Checkbox.Group>
+                <Checkbox.Group options={sn.snList.map(v => {return v.sn})} onChange={this.changeSelectSnGroup} />
               )}
             </FormItem>
           </Form>

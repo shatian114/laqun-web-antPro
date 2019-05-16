@@ -25,22 +25,22 @@ class AddFriend extends PureComponent {
       <Card>
         <Form layout="inline">
           <FormItem label="点赞数量">
-            {getFieldDecorator('dianzanNum', {
+            {getFieldDecorator('点赞数量', {
               initialValue: '',
             })(<Input placeholder='请输入点赞数量' />)}
           </FormItem>
           <FormItem label="评论数量">
-            {getFieldDecorator('pinglunNum', {
+            {getFieldDecorator('评论数量', {
               initialValue: '',
             })(<Input placeholder='请输入评论数量' />)}
           </FormItem>
           <FormItem label="看文章数量">
-            {getFieldDecorator('kanwenzhangNum', {
+            {getFieldDecorator('看文章数量', {
               initialValue: '',
             })(<Input placeholder='请输入看文章数量' />)}
           </FormItem>
           <FormItem label='发朋友圈类型'>
-            {getFieldDecorator('fapengyouquanType', {
+            {getFieldDecorator('朋友圈类型', {
               initialValue: '文字',
             })(
               <Select>
@@ -50,7 +50,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否互聊'>
-            {getFieldDecorator('isTalk', {
+            {getFieldDecorator('是否互聊', {
               initialValue: '是',
             })(
               <Select>

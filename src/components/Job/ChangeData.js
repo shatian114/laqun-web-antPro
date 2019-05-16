@@ -32,7 +32,7 @@ class AddFriend extends PureComponent {
           wrapperCol={{ xs: { span: 24 }, sm: { span: 16 } }}
         >
           <FormItem label='是否修改头像'>
-            {getFieldDecorator('isChangeAvatar', {
+            {getFieldDecorator('是否修改头像', {
               initialValue: '是',
             })(
               <Select>
@@ -42,7 +42,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否修改昵称'>
-            {getFieldDecorator('isChangeNick', {
+            {getFieldDecorator('是否修改昵称', {
               initialValue: '是',
             })(
               <Select>
@@ -52,7 +52,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否修改朋友圈背景'>
-            {getFieldDecorator('isChangeBack', {
+            {getFieldDecorator('是否修改朋友圈背景', {
               initialValue: '是',
             })(
               <Select>
@@ -62,7 +62,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否修改密码'>
-            {getFieldDecorator('isChangePassword', {
+            {getFieldDecorator('是否修改密码', {
               initialValue: '是',
             })(
               <Select>
@@ -72,7 +72,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否添加好友验证'>
-            {getFieldDecorator('isChangeAddVerify', {
+            {getFieldDecorator('是否添加好友验证', {
               initialValue: '是',
             })(
               <Select>
@@ -82,7 +82,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='修改地区列表'>
-            {getFieldDecorator('isChangeCountry', {
+            {getFieldDecorator('是否修改地区', {
               initialValue: '不修改',
             })(
               <Select>
@@ -95,7 +95,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否修改签名'>
-            {getFieldDecorator('isChangeSign', {
+            {getFieldDecorator('是否修改签名', {
               initialValue: '是',
             })(
               <Select>
@@ -105,7 +105,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='修改性别'>
-            {getFieldDecorator('isChangeSex', {
+            {getFieldDecorator('是否修改性别', {
               initialValue: '不修改',
             })(
               <Select>

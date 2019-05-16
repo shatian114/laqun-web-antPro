@@ -1,39 +1,39 @@
 import React, { PureComponent } from 'react';
-import { Form, Card, Input, Button, Table, Popconfirm } from 'antd';
+import { Form, Card, Input, Button, Table } from 'antd';
 import { connect } from 'dva';
 
 const FormItem = Form.Item;
 
-@connect(({ ip, loading }) => ({
-  ip,
-  searching: loading.effects['sn/search'],
-  deleteing: loading.effects['sn/delete'],
+@connect(({ addWxHistory, loading }) => ({
+  addWxHistory,
+  searching: loading.effects['addWxHistory/search'],
+  deleteing: loading.effects['addWxHistory/delete'],
 }))
 @Form.create()
-class IpMgr extends PureComponent {
+class AddWxHistory extends PureComponent {
   search = (e, page = 1, pageSize = 10) => {
     const { form, dispatch } = this.props;
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch({
-          type: 'ip/search',
+          type: 'addWxHistory/search',
           payload: {
             ...values,
-            page: page,
-            pageSize: pageSize,
+            'page': page,
+            'pageSize': pageSize,
           },
         });
       }
     });
   };
 
-  delete = record => {
+  test = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'ip/delete',
+      type: 'imgResources/test',
       payload: {
-        ipAddr: record.ipAddr,
-        callback: this.search,
+        sn: '9oiujnmh',
+        wxidlist: 'wxid1,wxid2,wxid3'
       },
     });
   };
@@ -42,8 +42,7 @@ class IpMgr extends PureComponent {
     const {
       form: { getFieldDecorator },
       searching,
-      deleteing,
-      ip,
+      addWxHistory,
     } = this.props;
     const columns = [
       {
@@ -52,66 +51,55 @@ class IpMgr extends PureComponent {
         render: (text, record, index) => <span>{index + 1}</span>,
       },
       {
-        title: 'IP',
-        dataIndex: 'ipAddr',
+        title: 'wxid',
+        dataIndex: 'wxid',
         key: 1,
       },
       {
-        title: '使用次数',
-        dataIndex: 'useNum',
+        title: '被添加次数',
+        dataIndex: 'gaddNum',
         key: 2,
       },
       {
-        title: '最后使用时间',
-        dataIndex: 'lastUseTime',
+        title: '被添加最后时间',
+        dataIndex: 'goAddTime',
         key: 3,
-        render: (text) => (
-          <span>{new Date(parseInt(text) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ')}</span>
-        )
       },
       {
-        title: '操作',
+        title: '添加时间',
+        dataIndex: 'addTime',
         key: 4,
-        render: (text, record) => (
-          <Button.Group size="small">
-            <Popconfirm
-              title="确定要删除吗？"
-              onConfirm={() => {
-                this.delete(record);
-              }}
-            >
-              <Button icon="delete" loading={deleteing}>
-                删除
-              </Button>
-            </Popconfirm>
-          </Button.Group>
-        ),
       },
     ];
     return (
       <Card>
         <Form layout="inline">
-          <FormItem label="查询IP">
-            {getFieldDecorator('searchIp', {
+          <FormItem label="查询wxid">
+            {getFieldDecorator('wxid', {
               initialValue: '',
-            })(<Input placeholder="请输入要查询的IP" />)}
+            })(<Input placeholder="请输入要查询的wxid" />)}
           </FormItem>
           <FormItem>
             <Button onClick={this.search} icon="search" type="primary" loading={searching}>
               查询
             </Button>
           </FormItem>
+          <FormItem>
+            <Button onClick={this.test} icon="search" type="primary" loading={searching}>
+              测试
+            </Button>
+          </FormItem>
         </Form>
 
         <Table
-          dataSource={ip.ipList}
+          dataSource={addWxHistory.infoList}
           loading={searching}
           columns={columns}
           pagination={{
             onChange: (page, pageSize) => {
               this.search(this, page, pageSize);
             },
-            total: ip.total,
+            total: addWxHistory.total,
             showSizeChanger: true,
             onShowSizeChange: (page, pageSize) => {
               this.search(this, page, pageSize);
@@ -123,4 +111,4 @@ class IpMgr extends PureComponent {
   }
 }
 
-export default IpMgr;
+export default AddWxHistory;

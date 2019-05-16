@@ -45,11 +45,11 @@ export default [
       //   name: '手机APP管理',
       //   component: './wxQunWeb/PhoneAppMgr',
       // },
-      {
-        path: '/wxQunWeb/CustomerMgr',
-        name: '客户管理',
-        component: './wxQunWeb/CustomerMgr',
-      },
+      // {
+      //   path: '/wxQunWeb/CustomerMgr',
+      //   name: '客户管理',
+      //   component: './wxQunWeb/CustomerMgr',
+      // },
       {
         path: '/wxQunWeb/IpMgr',
         name: 'IP管理',
@@ -105,6 +105,16 @@ export default [
         path: '/wxQunWeb/GetExcel',
         name: '获取报表',
         component: './wxQunWeb/GetExcel',
+      },
+      {
+        path: '/wxQunWeb/LaQunHistory',
+        name: '拉群历史',
+        component: './wxQunWeb/LaQunHistory',
+      },
+      {
+        path: '/wxQunWeb/AddWxHistory',
+        name: '添加微信历史',
+        component: './wxQunWeb/AddWxHistory',
       },
       {
         component: '404',

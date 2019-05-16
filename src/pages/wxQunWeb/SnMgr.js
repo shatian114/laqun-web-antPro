@@ -99,6 +99,17 @@ class SnMgr extends PureComponent {
     });
   };
 
+  stopJob = (record) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'sn/stopJob',
+      payload: {
+        sn: record.sn,
+        callback: this.search,
+      },
+    });
+  }
+
   render() {
     const {
       form: { getFieldDecorator },
@@ -195,8 +206,16 @@ class SnMgr extends PureComponent {
                 删除
               </Button>
             </Popconfirm>
-
-            <Button icon="stop">停止任务</Button>
+            <Popconfirm
+              title="确定要停止吗？"
+              onConfirm={() => {
+                this.stopJob(record);
+              }}
+            >
+              <Button icon="stop" loading={deleteing}>
+                停止任务
+              </Button>
+            </Popconfirm>
           </Button.Group>
         ),
       },

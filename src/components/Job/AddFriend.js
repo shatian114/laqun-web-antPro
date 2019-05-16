@@ -25,12 +25,12 @@ class AddFriend extends PureComponent {
       <Card>
         <Form layout="inline">
           <FormItem label="加人次数">
-            {getFieldDecorator('addNum', {
+            {getFieldDecorator('添加数量', {
               initialValue: '',
             })(<Input placeholder='请输入加人次数' />)}
           </FormItem>
           <FormItem label='是否看文章'>
-            {getFieldDecorator('isViewWenzhang', {
+            {getFieldDecorator('是否看文章', {
               initialValue: '看',
             })(
               <Select>
@@ -40,7 +40,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否拉群'>
-            {getFieldDecorator('isLaqun', {
+            {getFieldDecorator('是否拉群', {
               initialValue: '拉',
             })(
               <Select>
@@ -50,7 +50,7 @@ class AddFriend extends PureComponent {
             )}
           </FormItem>
           <FormItem label='是否与互聊微信号聊天'>
-            {getFieldDecorator('isLaqun', {
+            {getFieldDecorator('是否互聊', {
               initialValue: '是',
             })(
               <Select>

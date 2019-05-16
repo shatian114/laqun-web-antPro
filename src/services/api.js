@@ -20,6 +20,10 @@ export async function addSn(data) {
   return requestForm('/addSn', data);
 }
 
+export async function stopJob(data) {
+  return requestPost('/stopJob', data);
+}
+
 export async function setRemark(data) {
   return requestPost('/setSnRemark', data);
 }
@@ -172,10 +176,18 @@ export async function generalExcel(data) {
   return requestPost('/generalExcel', data);
 }
 
+export async function getLaQunHistory(data) {
+  return requestPost('/getLaQunHistory', data);
+}
+
+export async function getAddWxHistory(data) {
+  return requestPost('/getAddWxHistory', data);
+}
+
 export async function getCosSigner(data) {
   return requestPost('/getImgAuth', data);
 }
 
 export async function test(data) {
-  return requestPostTest('/getResource', data);
+  return requestPostTest('/getAddWxHistory', data);
 }

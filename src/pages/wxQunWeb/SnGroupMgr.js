@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, Card, Input, Button, Table, Modal, Popconfirm, Col, Checkbox } from 'antd';
+import { Form, Card, Input, Button, Table, Modal, Popconfirm, Col, Checkbox, Divider } from 'antd';
 import { connect } from 'dva';
 import { Row } from 'antd/es/grid';
 
@@ -227,20 +227,14 @@ class SnGroupMgr extends PureComponent {
                 initialValue: snGroup.groupName,
               })(<Input placeholder="请输入SN组名称" />)}
             </FormItem>
+            <Divider />
             <Checkbox onChange={this.allSelect}>全选/取消全选</Checkbox>
+            <Divider />
             <FormItem>
               {getFieldDecorator('groupMember', {
                 initialValue: this.state.groupMember,
               })(
-                <Checkbox.Group onChange={this.changeSelectSnGroup}>
-                  <Row>
-                    {sn.snList.map(v => (
-                      <Col key={v.sn} span={4}>
-                        <Checkbox value={v.sn}>{v.sn}</Checkbox>
-                      </Col>
-                    ))}
-                  </Row>
-                </Checkbox.Group>
+                <Checkbox.Group options={sn.snList.map(v => {return v.sn})} onChange={this.changeSelectSnGroup} />
               )}
             </FormItem>
           </Form>

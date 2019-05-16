@@ -16,15 +16,15 @@ const FormItem = Form.Item;
 @Form.create()
 class AddWxMgr extends PureComponent {
   componentDidMount = () => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'customer/search',
-      payload: {
-        customerName: '',
-        page: 1,
-        pageSize: 10000,
-      },
-    });
+    // const { dispatch } = this.props;
+    // dispatch({
+    //   type: 'customer/search',
+    //   payload: {
+    //     customerName: '',
+    //     page: 1,
+    //     pageSize: 10000,
+    //   },
+    // });
   };
 
   search = (e, page = 1, pageSize = 10) => {
@@ -76,7 +76,7 @@ class AddWxMgr extends PureComponent {
         dispatch({
           type: 'addWx/add',
           payload: {
-            customer: values.customer,
+            // customer: values.customer,
             priority: values.selectPriority,
             file: addWx.addWxFile,
             callback: this.search,
@@ -86,23 +86,13 @@ class AddWxMgr extends PureComponent {
     });
   };
 
-  changeType = resourceType => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'imgResources/save',
-      payload: {
-        resourceType: resourceType,
-      },
-    });
-  };
-
   render() {
     const {
       form: { getFieldDecorator },
       customerSearching,
       searching,
       adding,
-      customer,
+      // customer,
       addWx,
     } = this.props;
     const columns = [
@@ -171,11 +161,11 @@ class AddWxMgr extends PureComponent {
         dataIndex: 'priority',
         key: 12,
       },
-      {
-        title: '客户',
-        dataIndex: 'customer',
-        key: 13,
-      },
+      // {
+      //   title: '客户',
+      //   dataIndex: 'customer',
+      //   key: 13,
+      // },
       {
         title: '操作',
         key: 14,
@@ -196,11 +186,11 @@ class AddWxMgr extends PureComponent {
     return (
       <Card>
         <Form layout="inline">
-          <FormItem label="选择客户">
+          {/* <FormItem label="选择客户">
             {getFieldDecorator('customer', {
               initialValue: '',
             })(
-              <Select style={{ width: 140 }} onChange={this.changeType} loading={customerSearching}>
+              <Select style={{ width: 140 }} loading={customerSearching}>
                 {customer.customerList.map(v => (
                   <Option value={v.name} key={v.name}>
                     {v.name}
@@ -208,7 +198,7 @@ class AddWxMgr extends PureComponent {
                 ))}
               </Select>
             )}
-          </FormItem>
+          </FormItem> */}
           <FormItem label="查询手机">
             {getFieldDecorator('searchPhone', {
               initialValue: '',
@@ -234,7 +224,7 @@ class AddWxMgr extends PureComponent {
             {getFieldDecorator('selectPriority', {
               initialValue: 1,
             })(
-              <Select style={{ width: 50 }} onChange={this.changeType} loading={customerSearching}>
+              <Select style={{ width: 50 }} loading={customerSearching}>
                 <Option value={1}>1</Option>
                 <Option value={2}>2</Option>
                 <Option value={3}>3</Option>

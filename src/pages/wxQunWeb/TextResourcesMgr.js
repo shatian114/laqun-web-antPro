@@ -20,7 +20,7 @@ class TextResourcesMgr extends PureComponent {
         dispatch({
           type: 'textResources/search',
           payload: {
-            resourcesType: values.resourcesType,
+            resourceType: values.resourceType,
             'page': page,
             'pageSize': pageSize,
           },
@@ -37,7 +37,7 @@ class TextResourcesMgr extends PureComponent {
           type: 'textResources/delete',
           payload: {
             val: record.val,
-            resourcesType: values.resourcesType,
+            resourceType: values.resourceType,
             callback: this.search,
           },
         });
@@ -62,7 +62,7 @@ class TextResourcesMgr extends PureComponent {
         dispatch({
           type: 'textResources/add',
           payload: {
-            resourceType: values.resourcesType,
+            resourceType: values.resourceType,
             file: textResources.textResourcesFile,
             callback: this.search,
           },
@@ -118,7 +118,7 @@ class TextResourcesMgr extends PureComponent {
       <Card>
         <Form layout="inline">
           <FormItem label="选择要操作的资源类型">
-            {getFieldDecorator('resourcesType', {
+            {getFieldDecorator('resourceType', {
               initialValue: 'nick',
             })(
               <Select style={{ width: 140 }}>

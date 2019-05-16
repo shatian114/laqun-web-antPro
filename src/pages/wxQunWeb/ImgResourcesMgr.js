@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Form, Card, Button, Table, Popconfirm, Upload, Select } from 'antd';
 import { connect } from 'dva';
-import { uploadImg } from '@/utils/uploadImg';
 import { webConfig } from '@/utils/Constant';
 
 const { Option } = Select;
@@ -22,7 +21,7 @@ class ImgResourcesMgr extends PureComponent {
         dispatch({
           type: 'imgResources/search',
           payload: {
-            resourcesType: values.resourcesType,
+            resourceType: values.resourcesType,
             page: page,
             pageSize: pageSize,
           },
@@ -39,7 +38,7 @@ class ImgResourcesMgr extends PureComponent {
           type: 'imgResources/delete',
           payload: {
             fileName: record.val,
-            resourcesType: values.resourcesType,
+            resourceType: values.resourcesType,
             callback: this.search,
           },
         });
@@ -88,7 +87,10 @@ class ImgResourcesMgr extends PureComponent {
     dispatch({
       type: 'imgResources/test',
       payload: {
-        sn: '29',
+        sn: 'b5794f4f',
+        jobName: '测试',
+        jobContent: '测试内容',
+        wxid: '6',
         resourcesType: 'avatar',
         resourcesNum: 2,
       },
@@ -177,7 +179,7 @@ class ImgResourcesMgr extends PureComponent {
             </Upload>
           </FormItem>
           <FormItem>
-            <Button icon="file-add" type="primary" onClick={this.add} loading="adding">
+            <Button icon="file-add" type="primary" onClick={this.add} loading={adding}>
               添加
             </Button>
           </FormItem>
