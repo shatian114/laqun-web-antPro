@@ -70,6 +70,11 @@ class AddWxHistory extends PureComponent {
         dataIndex: 'addTime',
         key: 4,
       },
+      {
+        title: '备注',
+        dataIndex: 'remark',
+        key: 5,
+      },
     ];
     return (
       <Card>

@@ -67,10 +67,18 @@ class GlobalHeaderRight extends PureComponent {
     });
   };
 
-  login = () => {
-    const { login, dispatch } = this.props;
+  componentDidMount = () => {
+    const { dispatch } = this.props;
     dispatch({
-      type: login.isLogin ? 'login/logout' : 'login/logout',
+      type: 'login/isLogin',
+      payload: {},
+    });
+  }
+
+  logout = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'login/logout',
       payload: {},
     });
   };
@@ -201,8 +209,8 @@ class GlobalHeaderRight extends PureComponent {
           <Spin size="small" style={{ marginLeft: 8, marginRight: 8 }} />
         )} */}
         {/* <SelectLang className={styles.action} /> */}
-        <Button onClick={this.login} type="primary" className={styles.loginBtn}>
-          {this.props.login.isLogin ? '退出' : '登录'}
+        <Button onClick={this.logout} type="primary" className={styles.loginBtn}>
+          退出
         </Button>
       </div>
     );

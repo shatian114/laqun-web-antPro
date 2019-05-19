@@ -17,6 +17,8 @@ const FormItem = Form.Item;
 class SnGroupMgr extends PureComponent {
   state = {
     groupMember: [],
+    indeterminate: false,
+    isSelectAll: false,
   };
 
   componentDidMount = () => {
@@ -48,7 +50,7 @@ class SnGroupMgr extends PureComponent {
   };
 
   visibleOperate = (e, operateType, record) => {
-    const { dispatch } = this.props;
+    const { dispatch, form } = this.props;
     dispatch({
       type: 'snGroup/save',
       payload: {
@@ -58,7 +60,7 @@ class SnGroupMgr extends PureComponent {
         groupMember: operateType === 'change' ? record.groupMember.split(',') : [],
       },
     });
-    this.setState({
+    form.setFieldsValue({
       groupMember: operateType === 'change' ? record.groupMember.split(',') : [],
     });
   };
@@ -84,13 +86,6 @@ class SnGroupMgr extends PureComponent {
     });
   };
 
-  allSelect = e => {
-    const { sn } = this.props;
-    this.setState({
-      groupMember: e.target.checked ? sn.snList.map(v => v.sn) : [],
-    });
-  };
-
   operateSnGroup = () => {
     const { dispatch, form, snGroup } = this.props;
     form.validateFieldsAndScroll((err, values) => {
@@ -108,15 +103,30 @@ class SnGroupMgr extends PureComponent {
     });
   };
 
-  changeSelectSnGroup = snArr => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'snGroup/save',
-      payload: {
-        groupMember: snArr,
-      },
+  allSelect = e => {
+    const { sn, form } = this.props;
+    form.setFieldsValue({
+      groupMember: e.target.checked ? sn.snList.map(v => v.sn) : [],
+    });
+    this.setState({
+      isSelectAll: e.target.checked
     });
   };
+
+  changeSnGroup = (groupMember) => {
+    const { form } = this.props;
+    form.setFieldsValue({
+      groupMember: groupMember,
+    });
+  };
+
+  changeSelectSnGroup = (snArr) => {
+    const { sn } = this.props;
+    this.setState({
+      indeterminate: snArr.length > 0 && snArr.length < sn.snList.length,
+      isSelectAll: snArr.length === sn.snList.length,
+    });
+  }
 
   render() {
     const {
@@ -228,7 +238,7 @@ class SnGroupMgr extends PureComponent {
               })(<Input placeholder="请输入SN组名称" />)}
             </FormItem>
             <Divider />
-            <Checkbox onChange={this.allSelect}>全选/取消全选</Checkbox>
+            <Checkbox onChange={this.allSelect} indeterminate={this.state.indeterminate} checked={this.state.isSelectAll}>全选/取消全选</Checkbox>
             <Divider />
             <FormItem>
               {getFieldDecorator('groupMember', {

@@ -43,7 +43,8 @@ class AddFriend extends PureComponent {
             {getFieldDecorator('朋友圈类型', {
               initialValue: '文字',
             })(
-              <Select>
+              <Select style={{width: 140}}>
+                <Option value='不发'>不发</Option>
                 <Option value='文字'>文字</Option>
                 <Option value='文字和图片'>文字和图片</Option>
               </Select>

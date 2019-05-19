@@ -1,4 +1,4 @@
-import { login, logout } from '@/services/api';
+import { login, logout, isLogin } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import router from 'umi/router';
 import { message } from 'antd';
@@ -27,6 +27,26 @@ export default {
           router.push('/');
         } else {
           message.error(response.data.resInfo);
+        }
+      }
+    },
+    *isLogin({ payload }, { call, put }) {
+      const response = yield call(isLogin, payload);
+      // Login successfully
+      if (response.status === 200) {
+        const { data } = response;
+        if (data.resInfo === '登录成功') {
+          yield put({
+            type: 'save',
+            payload: {
+              isLogin: true,
+            },
+          });
+          message.success('登录成功');
+          router.push('/');
+        } else {
+          message.error(response.data.resInfo);
+          router.push('/user/login');
         }
       }
     },

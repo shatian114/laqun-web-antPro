@@ -4,6 +4,10 @@ export async function login(data) {
   return requestPost('/login', data);
 }
 
+export async function isLogin(data) {
+  return requestPost('/isLogin', data);
+}
+
 export async function logout() {
   return requestPost('/logout');
 }

@@ -22,8 +22,9 @@ class JobMgr extends PureComponent {
 
   state = {
     visibleSelectSn: false,
-    selectSnArr: [],
     job: '登录微信',
+    indeterminate: false,
+    isSelectAll: false,
   }
   
   componentDidMount = () => {
@@ -47,17 +48,29 @@ class JobMgr extends PureComponent {
   };
 
   allSelect = e => {
-    const { sn } = this.props;
-    this.setState({
+    const { sn, form } = this.props;
+    form.setFieldsValue({
       selectSnArr: e.target.checked ? sn.snList.map(v => v.sn) : [],
+    });
+    this.setState({
+      isSelectAll: e.target.checked
     });
   };
 
   changeSnGroup = (groupMember) => {
-    this.setState({
-      selectSnArr: groupMember
+    const { form } = this.props;
+    form.setFieldsValue({
+      selectSnArr: groupMember,
     });
   };
+
+  changeSelectSnGroup = (snArr) => {
+    const { sn } = this.props;
+    this.setState({
+      indeterminate: snArr.length > 0 && snArr.length < sn.snList.length,
+      isSelectAll: snArr.length === sn.snList.length,
+    });
+  }
 
   releaseJob = (jobContent) => {
     const { form, dispatch } = this.props;
@@ -156,11 +169,11 @@ class JobMgr extends PureComponent {
               )}
             </FormItem>
             <Divider />
-            <Checkbox onChange={this.allSelect}>全选/取消全选</Checkbox>
+            <Checkbox onChange={this.allSelect} indeterminate={this.state.indeterminate} checked={this.state.isSelectAll}>全选/取消全选</Checkbox>
             <Divider />
             <FormItem>
               {getFieldDecorator('selectSnArr', {
-                initialValue: this.state.selectSnArr,
+                initialValue: [],
               })(
                 <Checkbox.Group options={sn.snList.map(v => {return v.sn})} onChange={this.changeSelectSnGroup} />
               )}

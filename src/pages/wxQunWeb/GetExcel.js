@@ -10,18 +10,6 @@ const FormItem = Form.Item;
 }))
 @Form.create()
 class GetExcel extends PureComponent {
-  
-  componentDidMount = () => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'customer/search',
-      payload: {
-        customerName: '',
-        page: 1,
-        pageSize: 10000,
-      },
-    });
-  };
 
   generalExcel = () => {
     const { dispatch, form } = this.props;
@@ -40,7 +28,6 @@ class GetExcel extends PureComponent {
   render() {
     const {
       form: { getFieldDecorator },
-      customer,
     } = this.props;
     
     return (
@@ -59,21 +46,7 @@ class GetExcel extends PureComponent {
               </Select>
             )}
           </FormItem>
-          <FormItem label='选择客户'>
-            {getFieldDecorator('selectCustomer', {
-              initialValue: [],
-            })(
-              <Checkbox.Group>
-                <Row>
-                  {customer.customerList.map(v => (
-                    <Col key={v.name} span={150}>
-                      <Checkbox value={v.name}>{v.name}</Checkbox>
-                    </Col>
-                  ))}
-                </Row>
-              </Checkbox.Group>
-            )}
-          </FormItem>
+          
           <FormItem>
             <Button onClick={this.generalExcel} type='primary'>
               开始生成报表
