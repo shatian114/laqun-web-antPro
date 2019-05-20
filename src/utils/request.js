@@ -11,7 +11,7 @@ const axios = require('axios');
 
 const myAxios = axios.create({
   baseURL: '/wxQunWeb_war/api/webServer',
-  timeout: 10000,
+  timeout: 300000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
   },
@@ -19,7 +19,7 @@ const myAxios = axios.create({
 
 const testAxios = axios.create({
   baseURL: '/wxQunWeb_war/api/phoneServer',
-  timeout: 10000,
+  timeout: 300000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',
   },

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Form, Card, Select, Checkbox, Row, Col, Button } from 'antd';
+import { Form, Card, Select, Button } from 'antd';
 import { connect } from 'dva';
 
 const { Option } = Select;
@@ -37,7 +37,7 @@ class GetExcel extends PureComponent {
           wrapperCol={{ xs: { span: 24 }, sm: { span: 22 } }}
         >
           <FormItem label="请选择类型">
-            {getFieldDecorator('selectExcelType', {
+            {getFieldDecorator('excelType', {
               initialValue: '已拉完的群',
             })(
               <Select style={{ width: 150 }}>
