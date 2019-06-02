@@ -79,7 +79,7 @@ export default {
   },
   proxy: {
     '/wxQunWeb_war': {
-      // target: 'http://193.112.207.237:33799',
+      // target: 'http://106.52.223.17:33799',
       target: 'http://localhost:8080',
       ws: true,
       changeOrigin: true,

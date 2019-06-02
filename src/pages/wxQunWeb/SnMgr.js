@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Form, Card, Input, Button, Table, Modal, Popconfirm, Upload } from 'antd';
+import { Form, Card, Input, Button, Table, Modal, Popconfirm, Upload, Divider } from 'antd';
 import { connect } from 'dva';
+import SelectSn from '../../components/SelectSn';
 
 const { TextArea } = Input;
 const FormItem = Form.Item;
+let selectSnArr = [];
 
 @connect(({ sn, loading }) => ({
   sn,
@@ -38,7 +40,7 @@ class SnMgr extends PureComponent {
           type: 'sn/setRemark',
           payload: {
             ...values,
-            sn: sn.editRecord.sn,
+            snArrStr: sn.editSnArrStr,
             callback: this.search,
           },
         });
@@ -51,7 +53,7 @@ class SnMgr extends PureComponent {
     dispatch({
       type: 'sn/save',
       payload: {
-        editRecord: record,
+        editSnArrStr: record,
         visibleEditRemark: true,
       },
     });
@@ -99,15 +101,19 @@ class SnMgr extends PureComponent {
     });
   };
 
-  stopJob = (record) => {
+  stopJob = (snArrStr) => {
     const { dispatch } = this.props;
     dispatch({
       type: 'sn/stopJob',
       payload: {
-        sn: record.sn,
+        snArrStr: snArrStr,
         callback: this.search,
       },
     });
+  }
+
+  selectSn = (selectSnArrParam) => {
+    selectSnArr = selectSnArrParam;
   }
 
   render() {
@@ -134,7 +140,11 @@ class SnMgr extends PureComponent {
         title: '备注',
         dataIndex: 'remark',
         key: 2,
-        editable: true,
+      },
+      {
+        title: '任务进度',
+        dataIndex: 'jobState',
+        key: 12,
       },
       {
         title: '异常微信数量',
@@ -191,7 +201,7 @@ class SnMgr extends PureComponent {
             <Button
               icon="edit"
               onClick={() => {
-                this.visibleEditRemark(record);
+                this.visibleEditRemark(record.sn);
               }}
             >
               设置备注
@@ -209,7 +219,7 @@ class SnMgr extends PureComponent {
             <Popconfirm
               title="确定要停止吗？"
               onConfirm={() => {
-                this.stopJob(record);
+                this.stopJob(record.sn);
               }}
             >
               <Button icon="stop" loading={deleteing}>
@@ -248,6 +258,12 @@ class SnMgr extends PureComponent {
               添加
             </Button>
           </FormItem>
+          <FormItem>
+            <Button icon="more" type="primary" onClick={() => {this.props.dispatch({type: 'sn/save', payload: {visibleSelectSn: true}})}}>
+              批量操作
+            </Button>
+          </FormItem>
+          <Divider />
         </Form>
 
         <Table
@@ -265,6 +281,31 @@ class SnMgr extends PureComponent {
             },
           }}
         />
+
+        <Modal
+          footer={null}
+          destroyOnClose
+          width="60%"
+          title="批量操作"
+          visible={sn.visibleSelectSn}
+          onCancel={() => {this.props.dispatch({type: 'sn/save', payload: {visibleSelectSn: false}})}}
+        >
+          <SelectSn selectSn={this.selectSn} />
+          <Popconfirm
+            title="确定要停止吗？"
+            onConfirm={() => {
+              this.stopJob(selectSnArr.join(','));
+            }}
+          >
+            <Button icon="stop" loading={deleteing}>
+              停止任务
+            </Button>
+          </Popconfirm>
+          <Button icon="edit"
+              onClick={() => {
+                this.visibleEditRemark(selectSnArr.join(','));
+              }}>设置备注</Button>
+        </Modal>
 
         <Modal
           width="60%"

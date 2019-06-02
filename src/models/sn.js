@@ -5,9 +5,11 @@ export default {
   namespace: 'sn',
 
   state: {
+    editSnArrStr: '',
     snList: [],
     editRecord: {},
     visibleEditRemark: false,
+    visibleSelectSn: false,
     snFile: null,
     total: 0,
     page: 1,

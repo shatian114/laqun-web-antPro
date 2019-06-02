@@ -87,12 +87,23 @@ class ImgResourcesMgr extends PureComponent {
     dispatch({
       type: 'imgResources/test',
       payload: {
-        sn: 'b5794f4f',
+        sn: 'e1703b87',
+        loginWx: 'wxid_3x3wavupubee22',
         jobName: '测试',
         jobContent: '测试内容',
-        wxid: '6',
         resourcesType: 'avatar',
         resourcesNum: 2,
+        nick: "蕾",
+        province: " ",
+        city: "王者峡谷 中路草丛 🌱",
+        phone: "44951464",
+        sex: "2",
+        Signature: "                 \n只期待后来的你能快乐 \u2003\u2003\u2003     ",
+        jobState: "正常",
+        wxid: "lilei0106",
+        v1: "v1_13db4a29b0b4e3b1ec6d19994daca176ca62e78e51aec11662c5832841ce876f@stranger",
+        acatar: "暂无头像资源",
+        customer: "",
       },
     });
   }
@@ -183,11 +194,11 @@ class ImgResourcesMgr extends PureComponent {
               添加
             </Button>
           </FormItem>
-          <FormItem>
+          {/* <FormItem>
             <Button icon="file-add" type="primary" onClick={this.test}>
               测试获取图片
             </Button>
-          </FormItem>
+          </FormItem> */}
         </Form>
 
         <Table
