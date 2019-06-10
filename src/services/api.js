@@ -193,5 +193,5 @@ export async function getCosSigner(data) {
 }
 
 export async function test(data) {
-  return requestPostTest('/updateAddWx', data);
+  return requestPostTest('/insertSnException', data);
 }

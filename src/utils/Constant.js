@@ -14,7 +14,7 @@ export const formItemLayout = {
 export const formItemGrid = {
 	span: 8
 };
-8
+
 export function geneImportColumn(column){
   let column2 = column;
   column2.shift();
@@ -22,7 +22,7 @@ export function geneImportColumn(column){
 }
 
 export const webConfig = {
-	Bucket: '-1258004048',
+  Bucket: '-1258004048',
   Region: 'ap-guangzhou',
   tpUriPre: '-1258004048.cos.ap-guangzhou.myqcloud.com/',
 }
