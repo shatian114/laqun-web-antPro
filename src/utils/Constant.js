@@ -22,7 +22,7 @@ export function geneImportColumn(column){
 }
 
 export const webConfig = {
-  Bucket: '-1258004048',
+  Bucket: '-1259415556',
   Region: 'ap-guangzhou',
-  tpUriPre: '-1258004048.cos.ap-guangzhou.myqcloud.com/',
+  tpUriPre: '-1259415556.cos.ap-guangzhou.myqcloud.com/',
 }
